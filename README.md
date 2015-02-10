@@ -1,2 +1,2 @@
 # furry-octo-tribble
-Projekt: poliitiline soovitusleht
+Projekt: e-hääletamine
