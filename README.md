@@ -1,2 +1,2 @@
 # furry-octo-tribble
-veebirakenduste loomine
+Projekt: poliitiline soovitusleht
