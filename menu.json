@@ -1,0 +1,23 @@
+[
+  {
+    "url": "",
+    "name": "Avaleht",
+    "glyph":"glyphicon glyphicon-home"
+  },
+  {
+    "url":"kandidaadid",
+    "name":"Kandidaadid"
+  },
+  {
+    "url":"valima",
+    "name":"Valima"
+  },
+  {
+    "url":"tulemused",
+    "name":"Tulemused"
+  },
+  {
+    "url":"sisene",
+    "name":"Sisene"
+  }
+]

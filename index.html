@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html ng-app="EHaaletamineApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>E-h&auml;&auml;letamine</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <!-- angular -->
+    <script src="js/angular.min.js"></script>
+    <script src="js/jquery-1.11.2.min.js"></script>
+    <script src="js/angular-route.js"></script>
+
+    <!-- bootstrap -->
+    <script src="js/bootstrap.js"></script>
+
+    <!-- App script-->
+    <script src="app/js/main.js"></script>
+</head>
+<body ng-controller="MainController">
+
+<!-- Header -->
+<div data-ng-include="'app/partials/blocks/header.html'"></div>
+
+
+<!-- Sisu -->
+<div ng-view></div>
+
+
+</body>
+</html>
