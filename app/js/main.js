@@ -18,8 +18,11 @@ app.controller("NavController",function($scope,$http,$location){
 app.controller('HomeController', function($scope) {
     $scope.test = "Kodu"
 });
-app.controller('CandidatesController', function($scope) {
+app.controller('CandidatesController', function($scope,$http) {
     $scope.test = "Kandidaat"
+    $http.get('app/scripts/getCandidates.php').success(function(data) {//replace url
+        $scope.kandidaadid=data;
+    });
 });
 app.controller('ElectController', function($scope) {
     $scope.test = "Valimine"
