@@ -1,0 +1,51 @@
+<div>
+    <div class="col-xs-12 col-md-6 col-lg-6">
+        <h2 class="text-muted">Valimised</h2>
+        <div class="row">
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon glyphicon glyphicon-search"></span>
+                    <input ng-model="searchText" type="text" class="form-control" placeholder="Otsi">
+                </div>
+            </div>
+            <p ng-show="(valimised | filter:searchText).length == 0">Valimisi '{{searchText}}' ei leitud.</p>
+        </div>
+        <div class="scrolltable">
+            <table id="searchTextResults" ng-hide="(valimised | filter:searchText).length == 0" class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>Nimi</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="valimine in valimised | filter:searchText">
+
+                    <td>
+                        <div class="form-group">
+                            <div class="radio">
+                                <label >
+                                    <input type="radio" name="valik" id="{{valimine.id}}" ng-model="$parent.Valimine" ng-value="valimine" checked="">
+                                    </label>
+                            </div>
+                        </div>
+                    </td>
+                    <td >
+                        <label class="checkbox"></label>{{valimine.name}}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-xs-12 col-md-6 col-lg-6">
+        <h2 class="text-muted" >Info</h2>
+        <div ng-hide="Valimine==null">
+            <h2>{{Valimine.name}}</h2>
+            <h3 class="text-primary">{{'#' + Valimine.id}}</h3>
+            <h5>{{Valimine.description}}</h5>
+            <input type="button" name="addVote" class="btn btn-primary" ng-click="" value="Valima">
+            <h5 class="text-muted">Nupp hetkel ei tööta, paluma mõistvat suhtumist</h5>
+        </div>
+    </div>
+</div>

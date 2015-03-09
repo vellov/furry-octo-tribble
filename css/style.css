@@ -8,3 +8,7 @@
 .carousel-inner > .item > img {
     margin: 0 auto;
 }
+.scrolltable{
+    max-height: 400px;
+    overflow: auto;
+}

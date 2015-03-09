@@ -18,14 +18,27 @@ app.controller("NavController",function($scope,$http,$location){
 app.controller('HomeController', function($scope) {
     $scope.test = "Kodu"
 });
-app.controller('CandidatesController', function($scope,$http) {
-    $scope.test = "Kandidaat"
-    $http.get('app/scripts/getCandidates.php').success(function(data) {//replace url
-        $scope.kandidaadid=data;
+app.controller('ElectionsController', function($scope,$http) {
+    $http.get('app/scripts/getElections.php').success(function(data) {
+        $scope.valimised=data;
+        console.log(data);
     });
 });
-app.controller('ElectController', function($scope) {
-    $scope.test = "Valimine"
+app.controller('ElectController', function($scope,$http) {
+    $scope.getCandidates=function(){
+        $http.get('app/scripts/getCandidates.php').success(function(data) {
+            $scope.kandidaadid=data;
+            console.log(data);
+        });
+    };
+    $scope.getCandidates();
+    $scope.addVote=function(id){
+        $http.post('app/scripts/addVote.php',{id:id}).success(function(data){
+            $scope.message="Hääl edukalt antud!";
+            $scope.kandid=null;
+            $scope.getCandidates();
+        });
+    }
 });
 app.controller('ResultsController', function($scope) {
     $scope.test = "Tulemused"
@@ -39,9 +52,9 @@ app.config(['$routeProvider', function($routeProvider)  {
             templateUrl: 'app/partials/avaleht.html',
             controller: 'HomeController'
         })
-        .when('/kandidaadid',{
-            templateUrl:'app/partials/kandidaadid.html',
-            controller:'CandidatesController'
+        .when('/valimised',{
+            templateUrl:'app/partials/valimised.html',
+            controller:'ElectionsController'
         })
         .when('/valima',{
             templateUrl:'app/partials/valima.html',
