@@ -7,9 +7,10 @@
  */
 
 include 'conf.php';
-
-if ($result = $conn->query("SELECT * FROM Candidates")) {
-  //  printf("Select returned %d rows.\n", $result->num_rows);
+//Baasist kandidaadid, kus election_id=parameeter $http päringust
+$params=$_GET;
+$electionId=$params["electionId"];
+if ($result = $conn->query("SELECT * FROM Candidates WHERE election_id=$electionId")) {
 }
 $rows = array();
 foreach($result as $row){

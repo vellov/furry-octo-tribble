@@ -1,5 +1,5 @@
 <div>
-    <div class="col-xs-12 col-md-6 col-lg-6">
+    <div class="col-xs-6 col-md-6 col-lg-6">
         <h2 class="text-muted">Valimised</h2>
         <div class="row">
             <div class="form-group">
@@ -26,26 +26,26 @@
                             <div class="radio">
                                 <label >
                                     <input type="radio" name="valik" id="{{valimine.id}}" ng-model="$parent.Valimine" ng-value="valimine" checked="">
-                                    </label>
+                                </label>
                             </div>
                         </div>
                     </td>
                     <td >
-                        <label class="checkbox"></label>{{valimine.name}}
+                        <label class="checkbox"></label>{{valimine.name | capitalize}}
                     </td>
                 </tr>
                 </tbody>
             </table>
         </div>
     </div>
-    <div class="col-xs-12 col-md-6 col-lg-6">
+    <div class="col-xs-6 col-md-6 col-lg-6">
         <h2 class="text-muted" >Info</h2>
         <div ng-hide="Valimine==null">
-            <h2>{{Valimine.name}}</h2>
+            <h2>{{Valimine.name | capitalize}}</h2>
             <h3 class="text-primary">{{'#' + Valimine.id}}</h3>
-            <h5>{{Valimine.description}}</h5>
-            <input type="button" name="addVote" class="btn btn-primary" ng-click="" value="Valima">
-            <h5 class="text-muted">Nupp hetkel ei tööta, paluma mõistvat suhtumist</h5>
+            <h5>{{Valimine.description | capitalize}}</h5>
+            <a ng-href="#/valima/{{Valimine.id}}" class="btn btn-primary" >Vaata kandidaate</a>
+            <a ng-href="#/kandideeri/{{Valimine.id}}" class="btn btn-primary" >Kandideeri</a>
         </div>
     </div>
 </div>

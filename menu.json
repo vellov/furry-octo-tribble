@@ -9,15 +9,7 @@
     "name":"Valimised"
   },
   {
-    "url":"valima",
-    "name":"Valima"
-  },
-  {
     "url":"tulemused",
     "name":"Tulemused"
-  },
-  {
-    "url":"sisene",
-    "name":"Sisene"
   }
 ]

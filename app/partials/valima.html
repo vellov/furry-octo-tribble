@@ -1,5 +1,5 @@
 <div>
-    <div class="col-xs-12 col-md-6 col-lg-6">
+    <div class="col-xs-6 col-md-6 col-lg-6">
         <h2 class="text-muted">Kandidaadid</h2>
         <div class="row">
             <!--input class="form-control" placeholder="Otsi" type="search" /><span class="glyphicon glyphicon-search"></span!-->
@@ -44,7 +44,7 @@
             </table>
         </div>
     </div>
-    <div class="col-xs-12 col-md-6 col-lg-6">
+    <div class="col-xs-6 col-md-6 col-lg-6">
         <h2 class="text-muted" >Kandidaatide tutvustus</h2>
         <div ng-show="kandid == null">
             <h5>{{message}}</h5>
@@ -54,9 +54,9 @@
             <h3 class="text-primary">{{'#' + kandid.id}}</h3>
             <img src="img/img.jpeg">
             <h5>{{kandid.description}}</h5>
-
-            <input type="button" name="addVote" class="btn btn-primary" ng-click="addVote(kandid.id)" value="Anna Hääl">
-
+            <div ng-show="user">
+                <input type="button" name="addVote" class="btn btn-primary" ng-click="addVote(kandid.id)" value="Anna Hääl">
+            </div>
         </div>
     </div>
 </div>

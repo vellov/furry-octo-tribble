@@ -12,3 +12,6 @@
     max-height: 400px;
     overflow: auto;
 }
+.custom-error{
+    color:maroon;
+}

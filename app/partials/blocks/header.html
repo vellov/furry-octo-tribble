@@ -15,11 +15,26 @@
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
+                <form class="navbar-form navbar-right pull-right">
+                    <button type="button" class="btn btn-primary" ng-click="loginToggle()">
+                        <span ng-if="status">Välju</span>
+                        <span ng-if="!status">Sisene Facebooki kaudu</span>
+                    </button>
+                </form>
                 <ul class="nav navbar-nav navbar-right">
-                    <li ng-class="{active:isActive('/{{link.url}}')}"  ng-repeat="link in menu"> <a href="#/{{link.url}}"><span class="{{link.glyph}}"></span> {{link.name}}</a></li>
+                    <li ng-class="{active:isActive('/{{link.url}}')}"  ng-repeat="link in menu">
+                        <a ng-href="#/{{link.url}}">
+                            <span class="{{link.glyph}}"></span> {{link.name}}
+                        </a>
+                    </li>
+                    <li ng-show="user.role=='admin'">
+                        <a ng-href="#/uus">
+                            Uus valimine
+                        </a>
+                    </li>
                 </ul>
-                 <!-- /.navbar-collapse -->
+
+                <!-- /.navbar-collapse -->
             </div>
         </div><!-- /.container-fluid -->
     </nav>
