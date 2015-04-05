@@ -27,7 +27,7 @@
                             <span class="{{link.glyph}}"></span> {{link.name}}
                         </a>
                     </li>
-                    <li ng-show="user.role=='admin'">
+                    <li ng-class="{active:isActive('/uus')}" ng-show="user.role=='admin'">
                         <a ng-href="#/uus">
                             Uus valimine
                         </a>
