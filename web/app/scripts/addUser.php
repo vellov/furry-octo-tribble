@@ -13,12 +13,25 @@ $firstName=$params["firstName"];
 $lastName=$params["lastName"];
 $fbid=$params["fbid"];
 $email=$params["email"];
-$qry = "INSERT IGNORE INTO Users(name,lastname,fbid,email) VALUES('$firstName','$lastName','$fbid','$email');";
-//Get role after insert
+//ADD USER QUERY
+$qry =
+    "INSERT INTO USERS
+    (name,lastname,fbid,email)
+    SELECT '$firstName', '$lastName','$fbid','$email'
+    WHERE
+      NOT EXISTS (
+      SELECT fbid FROM Users WHERE fbid='$fbid'
+      )";
+
+//GET ROLE QUERY
 $getRole="SELECT role FROM Users WHERE fbid='$fbid';";
-$qry_res = $conn->query($qry);
+
+//Insert user if doesn't exist
+$qry_res =pg_query($conn,$qry);
 if ($qry_res) {
-    $role=$conn->query($getRole);
+    $qry_res=pg_fetch_all($qry_res);
+    $role=pg_query($conn,$getRole);//get role
+    $role=pg_fetch_all($role);
     $rows = array();
     foreach($role as $row){
         $rows[]=$row;

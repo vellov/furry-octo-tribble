@@ -80,6 +80,18 @@ app.controller('ElectionsController', function($scope,$http) {
         $scope.valimised=data;
         console.log(data);
     });
+    $scope.checkIfCandidate=function(electionId){
+        if($scope.user) {
+            $http.get('app/scripts/checkIfCandidate.php', {
+                params: {
+                    electionId: electionId,
+                    userId: $scope.user.id
+                }
+            }).success(function (data) {
+               $scope.isCandidate=data.isCandidate;
+            });
+        }
+    };
 });
 app.controller('ElectController', function($scope,$http,$routeParams) {
     $scope.getCandidates=function(){
@@ -88,8 +100,9 @@ app.controller('ElectController', function($scope,$http,$routeParams) {
         });
     };
     $scope.getCandidates();
+
     $scope.addVote=function(id){
-        $http.post('app/scripts/addVote.php',{id:id}).success(function(data){
+        $http.post('app/scripts/addVote.php',{candidateId:id,electionId:$routeParams.electionId, userId:$scope.user.id}).success(function(data){
             $scope.message="Hääl edukalt antud!";
             $scope.kandid=null;
             $scope.getCandidates();
@@ -118,7 +131,8 @@ app.controller('CandidateController', function($scope,$routeParams,$http,$locati
         eesnimi:$scope.user.first_name,
         perenimi:$scope.user.last_name,
         kirjeldus:'',
-        electionId:$routeParams.electionId
+        electionId:$routeParams.electionId,
+        userId:$scope.user.id
     };
     $scope.submit=function(){
         $scope.submitted=true;

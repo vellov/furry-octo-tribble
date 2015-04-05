@@ -19,7 +19,7 @@ $name=$valimine["nimetus"];
 $description=$valimine["kirjeldus"];
 $qry = "INSERT INTO Elections(name, description) VALUES('$name','$description');";
 
-$qry_res = $conn->query($qry);
+$qry_res = pg_query($qry);
 if ($qry_res) {
     // printf($qry_res);
     $arr = array('msg' => "Product Updated Successfully!!!", 'error' => '');

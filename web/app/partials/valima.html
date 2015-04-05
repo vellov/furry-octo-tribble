@@ -52,7 +52,7 @@
         <div ng-hide="kandid==null">
             <h2>{{kandid.firstname}} {{kandid.lastname}}</h2>
             <h3 class="text-primary">{{'#' + kandid.id}}</h3>
-            <img src="img/img.jpeg">
+            <img src=" https://graph.facebook.com/{{kandid.userid}}/picture?type=large" />
             <h5>{{kandid.description}}</h5>
             <div ng-show="user">
                 <input type="button" name="addVote" class="btn btn-primary" ng-click="addVote(kandid.id)" value="Anna Hääl">
