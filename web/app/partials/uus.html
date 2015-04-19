@@ -3,27 +3,27 @@
     <form name="uusValimine" class="form form-horizontal" novalidate="true">
         <div class="form-group">
             <div class="col-md-6 col-lg-6">
-                <input type="text" ng-model="valimine.nimetus" name="nimetus"  class="form-control" placeholder="Valimise nimetus" required="true" >
+                <input type="text" data-ng-model="valimine.nimetus" name="nimetus"  class="form-control" placeholder="Valimise nimetus" required="true" >
             </div>
-            <div ng-messages="uusValimine.nimetus.$error" class="custom-error">
-                <div ng-message="required" >
-                    <label ng-show="submitted" class="control-label">Nimetus on kohustuslik!  </label>
+            <div data-ng-messages="uusValimine.nimetus.$error" class="custom-error">
+                <div data-ng-message="required" >
+                    <label data-ng-show="submitted" class="control-label">Nimetus on kohustuslik!  </label>
                 </div>
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-6 col-lg-6">
-                <textarea rows="6"  class="form-control" name="kirjeldus" ng-model="valimine.kirjeldus" placeholder="Valimise kirjeldus" required="true"></textarea>
+                <textarea rows="6"  class="form-control" name="kirjeldus" data-ng-model="valimine.kirjeldus" placeholder="Valimise kirjeldus" required="true"></textarea>
             </div>
-            <div ng-messages="uusValimine.kirjeldus.$error" class="custom-error">
-                <div ng-message="required" >
-                    <label ng-show="submitted" class="control-label">Kirjeldus on kohustuslik!  </label>
+            <div data-ng-messages="uusValimine.kirjeldus.$error" class="custom-error">
+                <div data-ng-message="required" >
+                    <label data-ng-show="submitted" class="control-label">Kirjeldus on kohustuslik!  </label>
                 </div>
             </div>
         </div>
         <div class="form-action">
-            <button class="btn btn-success" ng-click="submit()">Valmis</button>
+            <button class="btn btn-success" data-ng-click="submit()">Valmis</button>
         </div>
     </form>
 

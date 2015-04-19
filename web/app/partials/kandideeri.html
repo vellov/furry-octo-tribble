@@ -4,38 +4,38 @@
         <div class="form-group">
             <div class="col-md-6 col-lg-6">
                 <h4 class="text-muted">Eesnimi</h4>
-                <input type="text" class="form-control" name="eesnimi" placeholder="Eesnimi" ng-model="kandidaat.eesnimi" required="true">
+                <input type="text" class="form-control" name="eesnimi" placeholder="Eesnimi" data-ng-model="kandidaat.eesnimi" required="true">
             </div>
-            <div ng-messages="kandideeri.eesnimi.$error" class="custom-error">
-                <div ng-message="required" >
-                    <label ng-show="submitted" class="control-label">Eesnimi on kohustuslik!  </label>
+            <div data-ng-messages="kandideeri.eesnimi.$error" class="custom-error">
+                <div data-ng-message="required" >
+                    <label data-ng-show="submitted" class="control-label">Eesnimi on kohustuslik!  </label>
                 </div>
             </div>
         </div>
         <div class="form-group">
             <div class="col-md-6 col-lg-6">
                 <h4 class="text-muted">Perenimi</h4>
-                <input type="text" class="form-control" placeholder="Perenimi" name="perenimi" ng-model="kandidaat.perenimi" required="true">
+                <input type="text" class="form-control" placeholder="Perenimi" name="perenimi" data-ng-model="kandidaat.perenimi" required="true">
             </div>
-            <div ng-messages="kandideeri.perenimi.$error" class="custom-error">
-                <div ng-message="required" >
-                    <label ng-show="submitted" class="control-label">Perenimi on kohustuslik!  </label>
+            <div data-ng-messages="kandideeri.perenimi.$error" class="custom-error">
+                <div data-ng-message="required" >
+                    <label data-ng-show="submitted" class="control-label">Perenimi on kohustuslik!  </label>
                 </div>
             </div>
         </div>
         <div class="form-group">
             <div class="col-md-6 col-lg-6">
                 <h4 class="text-muted">Kirjeldus</h4>
-                <textarea rows="4"  class="form-control" name="kirjeldus" ng-model="kandidaat.kirjeldus" placeholder="Miks peaks just sind valima?" required="true"></textarea>
+                <textarea rows="4"  class="form-control" name="kirjeldus" data-ng-model="kandidaat.kirjeldus" placeholder="Miks peaks just sind valima?" required="true"></textarea>
             </div>
-            <div ng-messages="kandideeri.kirjeldus.$error" class="custom-error">
-                <div ng-message="required" >
-                    <label ng-show="submitted" class="control-label">Kirjeldus on kohustuslik!  </label>
+            <div data-ng-messages="kandideeri.kirjeldus.$error" class="custom-error">
+                <div data-ng-message="required" >
+                    <label data-ng-show="submitted" class="control-label">Kirjeldus on kohustuslik!  </label>
                 </div>
             </div>
         </div>
         <div class="form-action">
-            <button class="btn btn-success" ng-click="submit()">Valmis</button>
+            <button class="btn btn-success" data-ng-click="submit()">Valmis</button>
         </div>
 
     </form>

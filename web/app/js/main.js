@@ -170,17 +170,14 @@ app.config(['$routeProvider', function($routeProvider)  {
             controller:'CandidateController',
             Login :true
         })
-        .when('/tulemused',{
-            templateUrl:'app/partials/tulemused.html',
-            controller:'ResultsController'
-        });
+
     $routeProvider.otherwise({redirectTo: '/'});
 }]);
 
 //Ei luba keelatud lehtedele.
 app.run(['$rootScope',function($rootScope) {
     $rootScope.$on("$routeChangeStart", function(event, next, current) {
-        if(next.AdminLogin && $rootScope.user.role!='admin') {
+        if(next.AdminLogin && (!$rootScope.user || $rootScope.user.role!='admin')) {
             event.preventDefault();
         }
         if(next.Login && (!$rootScope.user || ($rootScope.user.role!='user' && $rootScope.user.role!='admin'))){
