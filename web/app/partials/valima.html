@@ -9,10 +9,10 @@
                     <input data-ng-model="searchText" type="text" class="form-control" placeholder="Otsi">
                 </div>
             </div>
-            <p data-ng-show="(kandidaadid | filter:searchText).ledata-ngth == 0">Kandidaate '{{searchText}}' ei leitud.</p>
+            <p data-ng-show="(kandidaadid | filter:searchText).length == 0">Kandidaate '{{searchText}}' ei leitud.</p>
         </div>
         <div class="scrolltable">
-            <table id="searchTextResults" data-ng-hide="(kandidaadid | filter:searchText).ledata-ngth == 0" class="table table-striped table-hover">
+            <table id="searchTextResults" data-ng-hide="(kandidaadid | filter:searchText).length == 0" class="table table-striped table-hover">
                 <thead>
                 <tr>
                     <th>#</th>

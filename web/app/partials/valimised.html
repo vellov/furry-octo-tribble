@@ -8,10 +8,10 @@
                     <input data-ng-model="searchText" type="text" class="form-control" placeholder="Otsi">
                 </div>
             </div>
-            <p data-ng-show="(valimised | filter:searchText).ledata-ngth == 0">Valimisi '{{searchText}}' ei leitud.</p>
+            <p data-ng-show="(valimised | filter:searchText).length == 0">Valimisi '{{searchText}}' ei leitud.</p>
         </div>
         <div class="scrolltable">
-            <table id="searchTextResults" data-ng-hide="(valimised | filter:searchText).ledata-ngth == 0" class="table table-striped table-hover">
+            <table id="searchTextResults" data-ng-hide="(valimised | filter:searchText).length == 0" class="table table-striped table-hover">
                 <thead>
                 <tr>
                     <th></th>
@@ -25,7 +25,7 @@
                         <div class="form-group">
                             <div class="radio">
                                 <label >
-                                    <input type="radio" name="valik" id="{{valimine.id}}" data-ng-model="$parent.Valimine" data-ng-value="valimine" data-ng-chadata-nge="checkIfCandidate(valimine.id)" checked="">
+                                    <input type="radio" name="valik" id="{{valimine.id}}" data-ng-model="$parent.Valimine" data-ng-value="valimine" data-ng-change="checkIfCandidate(valimine.id)" checked="">
                                 </label>
                             </div>
                         </div>
