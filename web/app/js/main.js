@@ -75,11 +75,25 @@ app.controller("NavController",function($scope,$http,$location){
 app.controller('HomeController', function($scope) {
     $scope.test = "Kodu"
 });
-app.controller('ElectionsController', function($scope,$http) {
+app.controller('ElectionsController', function($scope,$http,$location) {
+	
+	$scope.getElections=function(){
     $http.get('app/scripts/getElections.php').success(function(data) {
         $scope.valimised=data;
         console.log(data);
-    });
+    	});
+	};
+    
+	$scope.getElections();
+	
+    $scope.deleteCandidate=function(id){
+        $http.post('app/scripts/deleteCandidate.php',{electionId:id, userId:$scope.user.id}).success(function(data){
+        	$scope.message="Kandidatuurist edukalt loobutud!";
+            $scope.Valimine=null;
+            $scope.getElections();
+        });
+    };
+    
     $scope.checkIfCandidate=function(electionId){
         if($scope.user) {
             $http.get('app/scripts/checkIfCandidate.php', {
@@ -156,6 +170,7 @@ app.controller('CandidateController', function($scope,$routeParams,$http,$locati
         electionId:$routeParams.electionId,
         userId:$scope.user.id
     };
+    
     $scope.submit=function(){
         $scope.submitted=true;
         if($scope.kandideeri.$valid){

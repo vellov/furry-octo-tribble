@@ -40,12 +40,16 @@
     </div>
     <div class="col-xs-6 col-md-6 col-lg-6">
         <h2 class="text-muted" >Info</h2>
+        <div data-ng-show="Valimine == null">
+            <h5>{{message}}</h5>
+        </div>
         <div data-ng-hide="Valimine==null">
             <h2>{{Valimine.name | capitalize}}</h2>
             <h3 class="text-primary">{{'#' + Valimine.id}}</h3>
             <h5>{{Valimine.description | capitalize}}</h5>
             <a data-ng-href="#/valima/{{Valimine.id}}" class="btn btn-primary" >Vaata kandidaate</a>
             <a data-ng-href="#/kandideeri/{{Valimine.id}}"  data-ng-if="isCandidate==0 && user" class="btn btn-primary" >Kandideeri</a>
+            <a data-ng-if="isCandidate==1" data-ng-click="deleteCandidate(Valimine.id)" class="btn btn-primary" >Loobu kandidatuurist</a>
             <div data-ng-if="isCandidate==1">Olete sellele valimisele juba kandideerinud</div>
         </div>
     </div>
