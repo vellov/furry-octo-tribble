@@ -100,7 +100,29 @@ app.controller('ElectController', function($scope,$http,$routeParams) {
         });
     };
     $scope.getCandidates();
+    
+    $scope.checkIfVoted=function(candidateId){
+        if($scope.user) {
+            $http.get('app/scripts/checkIfVoted.php', {
+                params: {
+                    electionId: $routeParams.electionId,
+                    userId: $scope.user.id,
+                    candidateId: candidateId
+                }
+            }).success(function (data) {
+               $scope.hasVoted=data.hasVoted;
+            });
+        }
+    };
 
+    $scope.deleteVote=function(id){
+        $http.post('app/scripts/deleteVote.php',{candidateId:id,electionId:$routeParams.electionId, userId:$scope.user.id}).success(function(data){
+            $scope.message="Hääl edukalt kustutatud!";
+            $scope.kandid=null;
+            $scope.getCandidates();
+        });
+    }
+    
     $scope.addVote=function(id){
         $http.post('app/scripts/addVote.php',{candidateId:id,electionId:$routeParams.electionId, userId:$scope.user.id}).success(function(data){
             $scope.message="Hääl edukalt antud!";

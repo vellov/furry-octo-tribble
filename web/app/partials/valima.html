@@ -27,7 +27,7 @@
                         <div class="form-group">
                             <div class="radio">
                                 <label >
-                                    <input type="radio" name="valik" id="{{kandidaat.id}}" data-ng-model="$parent.kandid" data-ng-value="kandidaat" checked="">
+                                    <input type="radio" name="valik" id="{{kandidaat.id}}" data-ng-model="$parent.kandid" data-ng-value="kandidaat" data-ng-change="checkIfVoted(kandidaat.id)" checked="">
                                     {{kandidaat.id}}</label>
                             </div>
                         </div>
@@ -55,7 +55,8 @@
             <img src=" https://graph.facebook.com/{{kandid.userid}}/picture?type=large" />
             <h5>{{kandid.description}}</h5>
             <div data-ng-show="user">
-                <input type="button" name="addVote" class="btn btn-primary" data-ng-click="addVote(kandid.id)" value="Anna Hääl">
+                <input type="button" name="addVote" class="btn btn-primary" data-ng-if="hasVoted==0" data-ng-click="addVote(kandid.id)" value="Anna Hääl">
+                <a data-ng-if="hasVoted==1" data-ng-click="deleteVote(kandid.id)" class="btn btn-primary" >Loobu häälest</a>
             </div>
         </div>
     </div>
