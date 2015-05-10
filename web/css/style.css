@@ -15,3 +15,6 @@
 .custom-error{
     color:maroon;
 }
+.table tbody>tr>td.vert-align{
+    vertical-align: middle;
+}

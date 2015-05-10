@@ -18,8 +18,10 @@ where Candidates.election_id='$electionId'";
 $result = pg_query($qry);
 $result=pg_fetch_all($result);
 $rows = array();
-foreach($result as $row){
-    $rows[]=$row;
+if($result){
+	foreach($result as $row){
+	    $rows[]=$row;
+	}
 }
 print json_encode($rows);
 ?>

@@ -53,10 +53,13 @@
             <h2>{{kandid.firstname}} {{kandid.lastname}}</h2>
             <h3 class="text-primary">{{'#' + kandid.id}}</h3>
             <img src=" https://graph.facebook.com/{{kandid.userid}}/picture?type=large" />
+            <blockquote>
             <h5>{{kandid.description}}</h5>
+            </blockquote>
             <div data-ng-show="user">
                 <input type="button" name="addVote" class="btn btn-primary" data-ng-if="hasVoted==0" data-ng-click="addVote(kandid.id)" value="Anna Hääl">
-                <a data-ng-if="hasVoted==1" data-ng-click="deleteVote(kandid.id)" class="btn btn-primary" >Loobu häälest</a>
+                <input type="button" name="deleteVote" class="btn btn-primary" data-ng-if="hasVoted==1" data-ng-click="deleteVote(kandid.id)" value="Loobu Häälest">
+                <!-- <a name="deleteVote" data-ng-if="hasVoted==1" data-ng-click="deleteVote(kandid.id)" class="btn btn-primary" >Loobu häälest</a> -->
             </div>
         </div>
     </div>

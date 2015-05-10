@@ -1,4 +1,98 @@
+<!-- Results modal -->
 <div>
+	<div class="modal fade" id="myModal">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+	        <h4 class="modal-title text-primary">{{Valimine.name}}</h4>
+	        <h5 class="text-muted">Tulemused: {{totalVotes}} häält.</h5>
+	      </div>
+	      <div class="modal-body">
+    </div>
+	        <table id="searchTextResults" data-ng-hide="(kandidaadid | filter:searchText).length == 0" class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nimi</th>
+                    <th>Häälte arv</th>
+                    <th>Protsent</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="kandidaat in kandidaadid | filter:searchText |  orderBy:'-votecount'">
+
+                    <td class="vert-align">
+                            {{kandidaat.id}}
+                    </td>
+                    <td class="vert-align">
+                        <label class="checkbox"></label>{{kandidaat.firstname}} {{kandidaat.lastname}}
+                    </td>
+                    <td class="vert-align">
+                    	{{kandidaat.votecount}}
+                    </td>
+                    <td class="vert-align">
+                    	{{kandidaat.votecount/totalVotes*100}}%
+                    </td>
+
+                </tr>
+                </tbody>
+            </table>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Sulge</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	
+	<!-- Delete candidate modal -->
+	<div>
+	<div class="modal fade" id="deleteCandidateModal">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+	        <h4 class="modal-title text-primary">{{Valimine.name}}</h4>
+	      </div>
+	      <div class="modal-body">
+	      	<blockquote>
+			  <p>Olete kindel, et soovite kandidatuurist loobuda?</p>
+			</blockquote>
+    		</div>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-danger" data-dismiss="modal" data-ng-click="deleteCandidate(Valimine.id)">Jah</button>
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Sulge</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+		<!-- Delete election modal -->
+	<div>
+	<div class="modal fade" id="deleteElectionModal">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+	        <h4 class="modal-title text-primary">{{Valimine.name}}</h4>
+	      </div>
+	      <div class="modal-body">
+	      	<blockquote>
+			  <p>Olete kindel, et soovite valimise kustutada?</p>
+			</blockquote>
+    		</div>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-danger" data-dismiss="modal" data-ng-click="deleteElection(Valimine.id)">Jah</button>
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Sulge</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	
+	
+	
     <div class="col-xs-6 col-md-6 col-lg-6">
         <h2 class="text-muted">Valimised</h2>
         <div class="row">
@@ -30,7 +124,7 @@
                             </div>
                         </div>
                     </td>
-                    <td >
+                    <td>
                         <label class="checkbox"></label>{{valimine.name | capitalize}}
                     </td>
                 </tr>
@@ -46,10 +140,17 @@
         <div data-ng-hide="Valimine==null">
             <h2>{{Valimine.name | capitalize}}</h2>
             <h3 class="text-primary">{{'#' + Valimine.id}}</h3>
+            <a data-ng-show="user.role=='admin'" data-toggle="modal" data-target="#deleteElectionModal" class="btn btn-danger" >Kustuta valimine</a>
+            <blockquote>
             <h5>{{Valimine.description | capitalize}}</h5>
-            <a data-ng-href="#/valima/{{Valimine.id}}" class="btn btn-primary" >Vaata kandidaate</a>
-            <a data-ng-href="#/kandideeri/{{Valimine.id}}"  data-ng-if="isCandidate==0 && user" class="btn btn-primary" >Kandideeri</a>
-            <a data-ng-if="isCandidate==1" data-ng-click="deleteCandidate(Valimine.id)" class="btn btn-primary" >Loobu kandidatuurist</a>
+            </blockquote>
+	            <div class="btn-group btn-group-justified">
+		            <a type="button" class="btn btn-default " data-ng-click="getElectionTotalVotes(Valimine.id); getCandidates(Valimine.id)" data-toggle="modal" data-target="#myModal">Tulemused</a>
+		            <a data-ng-href="#/valima/{{Valimine.id}}" class="btn btn-primary" >Vaata kandidaate</a>
+		            <a data-ng-href="#/kandideeri/{{Valimine.id}}"  data-ng-if="isCandidate==0 && user" class="btn btn-primary" >Kandideeri</a>
+		            <a data-ng-if="isCandidate==1" data-toggle="modal" data-target="#deleteCandidateModal" class="btn btn-primary" >Loobu kandidatuurist</a>
+	            </div>
+
             <div data-ng-if="isCandidate==1">Olete sellele valimisele juba kandideerinud</div>
         </div>
     </div>

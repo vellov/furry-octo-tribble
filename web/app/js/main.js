@@ -1,6 +1,7 @@
 /**
  * Created by vellovaherpuu on 08/02/15.
  */
+
 var app = angular.module('EHaaletamineApp', ['ngRoute','ngMessages','ngFacebook']);
 //FB
 app.config(['$facebookProvider', function($facebookProvider) {
@@ -86,7 +87,42 @@ app.controller('ElectionsController', function($scope,$http,$location) {
     
 	$scope.getElections();
 	
-    $scope.deleteCandidate=function(id){
+	$scope.getElectionTotalVotes=function(id){
+	    $http.get('app/scripts/getElectionTotalVotes.php',{params:{electionId:id}}).success(function(data) {
+	        $scope.totalVotes=data;
+	        console.log(data);
+	    	});
+	};
+
+	$scope.deleteElection=function(id){
+        $http.post('app/scripts/deleteElection.php',{electionId:id}).success(function(data){
+        	$scope.message="Valimine edukalt kustutatud!";
+            $scope.Valimine=null;
+            $scope.getElections();
+        });
+    };
+    
+    $scope.counter = 0;
+    $scope.max = 30;
+
+    $scope.increment = function(){
+        $scope.counter = $scope.counter + 1;
+        $scope.dynamic = $scope.counter / $scope.max * 100;
+    }
+//
+	
+	$scope.getCandidates=function(id){
+		$http.get('app/scripts/getCandidates.php',{params:{electionId:id}}).success(function(data) {
+			$scope.kandidaadid=data;
+			for(kandidaat in $scope.kandidaadid){
+				kandidaat.protsent = kandidaat.voteCount/$scope.totalVotes;
+				console.log(kandidaat.protsent);
+			}
+		});
+	};
+	
+
+	$scope.deleteCandidate=function(id){
         $http.post('app/scripts/deleteCandidate.php',{electionId:id, userId:$scope.user.id}).success(function(data){
         	$scope.message="Kandidatuurist edukalt loobutud!";
             $scope.Valimine=null;
