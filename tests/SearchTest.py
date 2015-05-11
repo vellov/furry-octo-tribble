@@ -12,7 +12,7 @@ class SearchTest(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.Firefox()
         self.driver.implicitly_wait(30)
-        self.base_url = "http://localhost/"
+        self.base_url = "https://pacific-sea-1219.herokuapp.com/"
         self.verificationErrors = []
         self.accept_next_alert = True
     
@@ -24,11 +24,9 @@ class SearchTest(unittest.TestCase):
         parser.set('test_id', 'lastElectionID', str(int(lastElectionID)+1))
         
         driver = self.driver
-        driver.get(self.base_url + "/furry-octo-tribble/web/#/")
+        driver.get(self.base_url + "#/")
         
         #Log in
-        self.assertEqual("Tere tulemast!", driver.find_element_by_xpath("//h3").text)
-        self.assertEqual("Logi sisse, et valimistel osaleda.", driver.find_element_by_xpath("//p").text)
         window_before = driver.window_handles[0]
         driver.find_element_by_css_selector("button.btn.btn-primary").click()
         print window_before
@@ -52,12 +50,14 @@ class SearchTest(unittest.TestCase):
         driver.find_element_by_css_selector("button.btn.btn-success").click()
         with open('testConfig.ini', 'w') as configfile:    # save
             parser.write(configfile)
-        bodyText = driver.find_element_by_css_selector("BODY").text
+        time.sleep(1)
         driver.find_element_by_xpath("//input[@type='text']").clear()
         driver.find_element_by_xpath("//input[@type='text']").send_keys("qwerty 1234")
+        time.sleep(1)
         self.assertEqual("Otsimise test", driver.find_element_by_css_selector("td.ng-binding").text)
         driver.find_element_by_xpath("//input[@type='text']").clear()
         driver.find_element_by_xpath("//input[@type='text']").send_keys("qwerty 1234 5678")
+        time.sleep(1)
         self.assertEqual("Valimisi 'qwerty 1234 5678' ei leitud.", driver.find_element_by_css_selector("p.ng-binding").text)
         driver.find_element_by_xpath("//input[@type='text']").clear()
         driver.find_element_by_xpath("//input[@type='text']").send_keys("qwerty 1234")

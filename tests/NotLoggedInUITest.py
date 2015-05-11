@@ -11,22 +11,23 @@ class NotLoggedInUITest(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.Firefox()
         self.driver.implicitly_wait(30)
-        self.base_url = "http://localhost/"
+        self.base_url = "https://pacific-sea-1219.herokuapp.com/"
         self.verificationErrors = []
         self.accept_next_alert = True
     
     def test_not_logged_in_u_i(self):
         driver = self.driver
-        driver.get(self.base_url + "furry-octo-tribble/web/#/")
+        driver.get(self.base_url + "#/")
         self.assertEqual("Tere tulemast!", driver.find_element_by_xpath("//h3").text)
         driver.find_element_by_link_text("Valimised").click()
         # ERROR: Caught exception [ERROR: Unsupported command [getAllFields |  | ]]
         self.assertEqual("Valimised", driver.find_element_by_xpath("//h2").text)
         driver.find_element_by_xpath("//input[@type='text']").clear()
         driver.find_element_by_xpath("//input[@type='text']").send_keys("riigikogu")
-        driver.find_element_by_id("5").click()
-        self.assertEqual("#5", driver.find_element_by_xpath("//h3").text)
+        driver.find_element_by_id("8").click()
+        self.assertEqual("#8", driver.find_element_by_xpath("//h3").text)
         driver.find_element_by_link_text("VAATA KANDIDAATE").click()
+        bodyText = driver.find_element_by_css_selector("BODY").text
         # ERROR: Caught exception [ERROR: Unsupported command [getAllFields |  | ]]
         self.assertEqual("Kandidaadid", driver.find_element_by_xpath("//h2").text)
         # ERROR: Caught exception [ERROR: Unsupported command [getTable | searchTextResults.1.1 | ]]

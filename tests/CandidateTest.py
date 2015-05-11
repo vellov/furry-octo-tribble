@@ -12,7 +12,7 @@ class CandidateTest(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.Firefox()
         self.driver.implicitly_wait(30)
-        self.base_url = "http://localhost/"
+        self.base_url = "https://pacific-sea-1219.herokuapp.com/"
         self.verificationErrors = []
         self.accept_next_alert = True
     
@@ -20,17 +20,11 @@ class CandidateTest(unittest.TestCase):
         #conf
         parser = SafeConfigParser()
         parser.read('testConfig.ini')
-        lastElectionID = str(parser.get('test_id', 'lastElectionID'))
-        parser.set('test_id', 'lastElectionID', str(int(lastElectionID)+1))
-        with open('testConfig.ini', 'w') as configfile:    # save
-            parser.write(configfile)
             
         driver = self.driver
-        driver.get(self.base_url + "/furry-octo-tribble/web/#/")
+        driver.get(self.base_url + "#/")
         
         #Log in
-        self.assertEqual("Tere tulemast!", driver.find_element_by_xpath("//h3").text)
-        self.assertEqual("Logi sisse, et valimistel osaleda.", driver.find_element_by_xpath("//p").text)
         window_before = driver.window_handles[0]
         driver.find_element_by_css_selector("button.btn.btn-primary").click()
         print window_before
@@ -47,7 +41,7 @@ class CandidateTest(unittest.TestCase):
         driver.switch_to_window(window_before)
         
         driver.find_element_by_link_text("Valimised").click()
-        driver.find_element_by_id("2").click()
+        driver.find_element_by_id("1").click()
         driver.find_element_by_link_text("KANDIDEERI").click()
         driver.find_element_by_name("kirjeldus").clear()
         driver.find_element_by_name("kirjeldus").send_keys("Testkasutaja kirjeldus.")
@@ -57,15 +51,18 @@ class CandidateTest(unittest.TestCase):
         with open('testConfig.ini', 'w') as configfile:    # save
             parser.write(configfile)
         
-        driver.find_element_by_id("2").click()
+        driver.find_element_by_id("1").click()
         driver.find_element_by_link_text("VAATA KANDIDAATE").click()
-        self.assertEqual("Testkasutaja Kasutaja", driver.find_element_by_xpath("//table[@id='searchTextResults']/tbody/tr[3]/td[2]").text)
+        time.sleep(1)        
+        bodyText = driver.find_element_by_css_selector("BODY").text
+        print bodyText
+        self.assertTrue("Testkasutaja Kasutaja" in bodyText)
         driver.find_element_by_link_text("Valimised").click()
-        driver.find_element_by_id("2").click()
+        driver.find_element_by_id("1").click()
         driver.find_element_by_link_text("LOOBU KANDIDATUURIST").click()
         driver.find_element_by_css_selector("button.btn.btn-danger").click()
         driver.find_element_by_link_text("Valimised").click()
-        driver.find_element_by_id("2").click()
+        driver.find_element_by_id("1").click()
         driver.find_element_by_link_text("VAATA KANDIDAATE").click()
         bodyText = driver.find_element_by_css_selector("BODY").text
         print bodyText

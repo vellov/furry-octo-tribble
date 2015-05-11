@@ -11,13 +11,13 @@ class LoginTest(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.Firefox()
         self.driver.implicitly_wait(30)
-        self.base_url = "http://localhost/"
+        self.base_url = "https://pacific-sea-1219.herokuapp.com/"
         self.verificationErrors = []
         self.accept_next_alert = True
     
     def test_login(self):
         driver = self.driver
-        driver.get(self.base_url + "/furry-octo-tribble/web/#/")
+        driver.get(self.base_url + "#/")
         self.assertEqual("Tere tulemast!", driver.find_element_by_xpath("//h3").text)
         self.assertEqual("Logi sisse, et valimistel osaleda.", driver.find_element_by_xpath("//p").text)
         

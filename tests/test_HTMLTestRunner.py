@@ -114,9 +114,9 @@ class Test_HTMLTestRunner(unittest.TestCase):
         self.suite.addTests([           
             unittest.defaultTestLoader.loadTestsFromTestCase(NotLoggedInUITest.NotLoggedInUITest),                               
             unittest.defaultTestLoader.loadTestsFromTestCase(LoginTest.LoginTest),
-            unittest.defaultTestLoader.loadTestsFromTestCase(ElectionTest.ElectionTest),
             unittest.defaultTestLoader.loadTestsFromTestCase(CandidateTest.CandidateTest),
             unittest.defaultTestLoader.loadTestsFromTestCase(VoteTest.VoteTest),
+            unittest.defaultTestLoader.loadTestsFromTestCase(ElectionTest.ElectionTest),
             unittest.defaultTestLoader.loadTestsFromTestCase(SearchTest.SearchTest),
             ])
 
@@ -125,7 +125,7 @@ class Test_HTMLTestRunner(unittest.TestCase):
         #runner = unittest.TextTestRunner(buf)       #DEBUG: this is the unittest baseline
         runner = HTMLTestRunner.HTMLTestRunner(
                     stream=buf,
-                    title='E-hääletamine Tests',
+                    title='E-voting Tests',
                     description='Test report.'
                     )
         runner.run(self.suite)

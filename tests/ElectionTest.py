@@ -12,7 +12,7 @@ class ElectionTest(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.Firefox()
         self.driver.implicitly_wait(30)
-        self.base_url = "http://localhost/"
+        self.base_url = "https://pacific-sea-1219.herokuapp.com/"
         self.verificationErrors = []
         self.accept_next_alert = True
     
@@ -22,13 +22,9 @@ class ElectionTest(unittest.TestCase):
         parser.read('testConfig.ini')
         lastElectionID = str(parser.get('test_id', 'lastElectionID'))
         parser.set('test_id', 'lastElectionID', str(int(lastElectionID)+1))
-        with open('testConfig.ini', 'w') as configfile:    # save
-            parser.write(configfile)
         
         driver = self.driver
-        driver.get(self.base_url + "/furry-octo-tribble/web/#/")
-        self.assertEqual("Tere tulemast!", driver.find_element_by_xpath("//h3").text)
-        self.assertEqual("Logi sisse, et valimistel osaleda.", driver.find_element_by_xpath("//p").text)
+        driver.get(self.base_url + "#/")
         window_before = driver.window_handles[0]
         driver.find_element_by_css_selector("button.btn.btn-primary").click()
         print window_before
@@ -50,6 +46,9 @@ class ElectionTest(unittest.TestCase):
         driver.find_element_by_name("kirjeldus").clear()
         driver.find_element_by_name("kirjeldus").send_keys("Testvalimise kirjeldus.")
         driver.find_element_by_css_selector("button.btn.btn-success").click()
+        time.sleep(1)
+        with open('testConfig.ini', 'w') as configfile:    # save
+            parser.write(configfile)
         driver.find_element_by_id(lastElectionID).click()
         self.assertEqual("#"+lastElectionID, driver.find_element_by_xpath("//h3").text)
         driver.find_element_by_link_text("KUSTUTA VALIMINE").click()
